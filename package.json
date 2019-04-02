@@ -1,0 +1,127 @@
+{
+  "name": "reacto-form-inputs",
+  "version": "1.0.0",
+  "description": "Example React components that implement the Composable Form Specification for form inputs",
+  "author": "Dairy State Designs (http://dairystatedesigns.com/)",
+  "license": "MIT",
+  "private": false,
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DairyStateDesigns/reacto-form-inputs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DairyStateDesigns/reacto-form-inputs/issues"
+  },
+  "homepage": "https://github.com/DairyStateDesigns/reacto-form-inputs",
+  "files": [
+    "CHANGELOG.md",
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "rules": {
+      "arrow-body-style": 0,
+      "consistent-return": 0,
+      "import/no-named-as-default": 0,
+      "import/no-named-as-default-member": 0,
+      "max-len": 0,
+      "no-param-reassign": 0,
+      "no-underscore-dangle": 0,
+      "no-use-before-define": [
+        2,
+        "nofunc"
+      ],
+      "no-unused-expressions": 0,
+      "no-console": 0,
+      "object-curly-newline": 0,
+      "space-before-function-paren": 0,
+      "react/default-props-match-prop-types": 0,
+      "react/destructuring-assignment": 0,
+      "react/jsx-filename-extension": 0,
+      "react/no-multi-comp": 0,
+      "react/prefer-stateless-function": 0,
+      "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/label-has-for": 0,
+      "jsx-a11y/anchor-is-valid": [
+        "warn",
+        {
+          "aspects": [
+            "invalidHref"
+          ]
+        }
+      ]
+    }
+  },
+  "jest": {
+    "setupFiles": [
+      "raf/polyfill",
+      "<rootDir>/jestSetup.js"
+    ]
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "scripts": {
+    "prebuild": "rm -rf dist/**",
+    "build": "npm run build:modules && npm run build:common",
+    "build:common": "BABEL_ENV=production babel lib --out-dir dist",
+    "build:modules": "BABEL_ENV=production BABEL_MODULES=1 babel lib --out-dir dist && renamer --find js --replace mjs 'dist/**'",
+    "lint": "eslint .",
+    "prepare": "npm run lint && npm test && npm run build",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": ">=15"
+  },
+  "dependencies": {
+    "clone": "^2.1.2",
+    "lodash.get": "4.4.2",
+    "lodash.isempty": "4.4.0",
+    "lodash.isequal": "4.5.0",
+    "lodash.set": "4.3.2",
+    "lodash.topath": "^4.5.2",
+    "lodash.union": "^4.6.0",
+    "lodash.uniqueid": "4.0.1",
+    "lodash.unset": "4.5.2",
+    "lodash.without": "^4.4.0",
+    "prop-types": "^15.6.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "composable-form-tests": "^1.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "jest": "^24.6.0",
+    "moment-timezone": "^0.5.14",
+    "raf": "^3.4.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "^16.8.6",
+    "renamer": "^1.1.1"
+  }
+}
