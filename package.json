@@ -72,32 +72,25 @@
       "<rootDir>/jestSetup.js"
     ]
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/index.js",
   "scripts": {
     "prebuild": "rm -rf dist/**",
     "build": "npm run build:modules && npm run build:common",
-    "build:common": "BABEL_ENV=production babel lib --out-dir dist",
-    "build:modules": "BABEL_ENV=production BABEL_MODULES=1 babel lib --out-dir dist && renamer --find js --replace mjs 'dist/**'",
+    "build:common": "BABEL_ENV=production babel lib --out-dir dist/cjs",
+    "build:modules": "BABEL_ENV=production BABEL_MODULES=1 babel lib --out-dir dist",
     "lint": "eslint .",
     "prepare": "npm run lint && npm test && npm run build",
     "test": "jest"
   },
   "peerDependencies": {
-    "react": ">=15"
+    "react": ">=16"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "clone": "^2.1.2",
-    "lodash.get": "4.4.2",
-    "lodash.isempty": "4.4.0",
-    "lodash.isequal": "4.5.0",
-    "lodash.set": "4.3.2",
-    "lodash.topath": "^4.5.2",
-    "lodash.union": "^4.6.0",
-    "lodash.uniqueid": "4.0.1",
-    "lodash.unset": "4.5.2",
-    "lodash.without": "^4.4.0",
-    "prop-types": "^15.6.1"
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -121,7 +114,6 @@
     "raf": "^3.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-test-renderer": "^16.8.6",
-    "renamer": "^1.1.1"
+    "react-test-renderer": "^16.8.6"
   }
 }
