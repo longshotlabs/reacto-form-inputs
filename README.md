@@ -14,17 +14,41 @@ Here are some design systems that are compatible:
 npm i --save reacto-form reacto-form-inputs
 ```
 
+## Importing
+
+### Recommended
+
+Import CommonJS from `reacto-form-inputs/cjs/<ComponentName>`. Example, assuming you have Babel configured to convert all `import` to `require`:
+
+```js
+import Field from 'reacto-form-inputs/cjs/Field';
+```
+
+Import ECMAScript module from `reacto-form-inputs/esm/<ComponentName>`. Example:
+
+```js
+import Field from 'reacto-form-inputs/esm/Field';
+```
+
+### Alternative
+
+You can also use named imports from the package entry point, but importing directly from the component path is recommended for minimizing bundle size.
+
+```js
+import { Field, Input } from 'reacto-form-inputs';
+```
+
 ## Example
 
 ```js
 import React, { Component } from 'react';
 import { Form, FormList } from 'reacto-form';
-import BooleanCheckboxInput from 'reacto-form-inputs/BooleanCheckboxInput';
-import DateTimeInput from 'reacto-form-inputs/DateTimeInput';
-import ErrorsBlock from 'reacto-form-inputs/ErrorsBlock';
-import Field from 'reacto-form-inputs/Field';
-import Input from 'reacto-form-inputs/Input';
-import SelectCheckboxInput from 'reacto-form-inputs/SelectCheckboxInput';
+import BooleanCheckboxInput from 'reacto-form-inputs/cjs/BooleanCheckboxInput';
+import DateTimeInput from 'reacto-form-inputs/cjs/DateTimeInput';
+import ErrorsBlock from 'reacto-form-inputs/cjs/ErrorsBlock';
+import Field from 'reacto-form-inputs/cjs/Field';
+import Input from 'reacto-form-inputs/cjs/Input';
+import SelectCheckboxInput from 'reacto-form-inputs/cjs/SelectCheckboxInput';
 import moment from 'moment-timezone';
 
 import createPlace from '../createPlace';
