@@ -1,0 +1,32 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": ["cjs/**/*", "esm/**/*", "node_modules/**/*", "lib/__snapshots__/**/*"],
+  "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "node", "react"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "off",
+    "perf": "off",
+    "style": "off"
+  },
+  "rules": {
+    "eslint/arrow-body-style": "off",
+    "eslint/no-console": "off",
+    "eslint/no-param-reassign": "off",
+    "eslint/no-underscore-dangle": "off",
+    "eslint/no-unused-expressions": "off",
+    "eslint/no-use-before-define": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "import/no-unassigned-import": "off",
+    "react/jsx-filename-extension": "off",
+    "react/no-multi-comp": "off",
+    "react/no-unsafe": "off"
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  }
+}

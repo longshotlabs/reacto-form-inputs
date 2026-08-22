@@ -1,103 +1,112 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
-import union from 'lodash/union';
-import uniqueId from 'lodash/uniqueId';
-import without from 'lodash/without';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import customPropTypes from './shared/propTypes';
+import customPropTypes from './shared/propTypes.js'
+import { isEqual, union, uniqueId, without } from './shared/utils.js'
 
-class SelectCheckboxInput extends Component {
-  static isFormInput = true;
+class SelectCheckboxInput extends Component<any, any> {
+  [key: string]: any
+  static isFormInput = true
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.validateOptions(props.options);
+    this.validateOptions(props.options)
 
     this.state = {
-      value: props.value || [],
-    };
+      value: props.value || []
+    }
   }
 
-  componentWillMount() {
-    this.handleChanged(this.state.value);
+  UNSAFE_componentWillMount() {
+    this.handleChanged(this.state.value)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { options, value } = this.props;
-    const { options: nextOptions, value: nextValue } = nextProps;
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { options, value } = this.props
+    const { options: nextOptions, value: nextValue } = nextProps
 
     // Whenever a changed value prop comes in, we reset state to that, thus becoming clean.
     if (!isEqual(value, nextValue)) {
-      this.setValue(nextValue);
+      this.setValue(nextValue)
     }
 
     if (!isEqual(options, nextOptions)) {
-      this.validateOptions(nextOptions);
+      this.validateOptions(nextOptions)
     }
   }
 
   handleChanged(value) {
-    const { onChange, onChanging } = this.props;
+    const { onChange, onChanging } = this.props
     if (!isEqual(value, this.lastValue)) {
-      this.lastValue = value;
-      onChanging(value);
-      onChange(value);
+      this.lastValue = value
+      onChanging(value)
+      onChange(value)
     }
   }
 
   getOnChangeHandler(optionValue) {
     return (event) => {
-      const { checked } = event.target;
-      const { value: arrayValue } = this.state;
-      const value = checked ? union(arrayValue, [optionValue]) : without(arrayValue, optionValue);
-      this.setValue(value);
-    };
+      const { checked } = event.target
+      const { value: arrayValue } = this.state
+      const value = checked ? union(arrayValue, [optionValue]) : without(arrayValue, optionValue)
+      this.setValue(value)
+    }
   }
 
   getValue() {
-    return this.state.value;
+    return this.state.value
   }
 
   setValue(value) {
-    value = value || [];
-    this.setState({ value });
-    this.handleChanged(value);
+    value = value || []
+    this.setState({ value })
+    this.handleChanged(value)
   }
 
   resetValue() {
-    this.setValue(this.props.value);
+    this.setValue(this.props.value)
   }
 
   // Input is dirty if value prop doesn't match value state. Whenever a changed
   // value prop comes in, we reset state to that, thus becoming clean.
   isDirty() {
-    return !isEqual(this.state.value, this.props.value);
+    return !isEqual(this.state.value, this.props.value)
   }
 
   // Make sure all option values have the same data type, and record what that is
   validateOptions(options) {
-    (options || []).forEach((option) => {
+    ;(options || []).forEach((option) => {
       if (option.optgroup) {
-        this.validateOptions(option.options);
+        this.validateOptions(option.options)
       } else {
-        const checkDataType = typeof option.value;
+        const checkDataType = typeof option.value
         if (!this.dataType) {
-          this.dataType = checkDataType;
+          this.dataType = checkDataType
         } else if (checkDataType !== this.dataType) {
-          throw new Error(`reacto-form SelectCheckboxInput: All option values must have the same data type. The data type of the first option is "${this.dataType}" while the data type of the ${option.label} option is "${checkDataType}"`);
+          throw new Error(
+            `reacto-form SelectCheckboxInput: All option values must have the same data type. The data type of the first option is "${this.dataType}" while the data type of the ${option.label} option is "${checkDataType}"`
+          )
         }
       }
-    });
+    })
   }
 
   renderOptions() {
-    const { checkboxClassName, checkboxStyle, isReadOnly, itemClassName, itemStyle, labelClassName, labelStyle, options } = this.props;
-    const { value } = this.state;
+    const {
+      checkboxClassName,
+      checkboxStyle,
+      isReadOnly,
+      itemClassName,
+      itemStyle,
+      labelClassName,
+      labelStyle,
+      options
+    } = this.props
+    const { value } = this.state
 
     return (options || []).map((option) => {
-      const id = uniqueId('SelectCheckboxInput_');
+      const id = uniqueId('SelectCheckboxInput_')
       return (
         <div className={itemClassName} key={option.id || `${option.value}`} style={itemStyle}>
           <label htmlFor={id} className={labelClassName} style={labelStyle}>
@@ -108,28 +117,28 @@ class SelectCheckboxInput extends Component {
               onChange={this.getOnChangeHandler(option.value)}
               readOnly={isReadOnly}
               style={checkboxStyle}
-              type="checkbox"
+              type='checkbox'
               value={option.value}
             />
             {option.label}
           </label>
         </div>
-      );
-    });
+      )
+    })
   }
 
   render() {
-    const { className, style } = this.props;
+    const { className, style } = this.props
 
     return (
       <div className={className} style={style}>
         {this.renderOptions()}
       </div>
-    );
+    )
   }
 }
 
-SelectCheckboxInput.propTypes = {
+;(SelectCheckboxInput as any).propTypes = {
   ...customPropTypes.inputs,
   className: PropTypes.string,
   checkboxClassName: PropTypes.string,
@@ -140,14 +149,12 @@ SelectCheckboxInput.propTypes = {
   labelStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   options: customPropTypes.options,
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  value: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.bool,
-  ])),
-};
+  value: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+  )
+}
 
-SelectCheckboxInput.defaultProps = {
+;(SelectCheckboxInput as any).defaultProps = {
   className: undefined,
   checkboxClassName: undefined,
   checkboxStyle: {},
@@ -163,7 +170,7 @@ SelectCheckboxInput.defaultProps = {
   options: [],
   placeholder: undefined,
   style: {},
-  value: undefined,
-};
+  value: undefined
+}
 
-export default SelectCheckboxInput;
+export default SelectCheckboxInput

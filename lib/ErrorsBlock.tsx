@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isEmpty from 'lodash/isEmpty';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import customPropTypes from './shared/propTypes';
+import customPropTypes from './shared/propTypes.js'
+import { isEmpty } from './shared/utils.js'
 
-class ErrorsBlock extends Component {
-  static isFormErrors = true;
+class ErrorsBlock extends Component<any, any> {
+  [key: string]: any
+  static isFormErrors = true
 
   render() {
-    const { errorClassName, errorStyle, errors, className, style } = this.props;
+    const { errorClassName, errorStyle, errors, className, style } = this.props
 
-    if (isEmpty(errors)) return null;
+    if (isEmpty(errors)) return null
 
     // https://reactjs.org/docs/lists-and-keys.html
     // "When you don’t have stable IDs for rendered items, you may use the item index as a key as a last resort.
@@ -21,29 +22,33 @@ class ErrorsBlock extends Component {
     return (
       <div className={className} style={style}>
         {errors.map((error, index) => {
-          return (<div key={index} className={errorClassName} data-name={error.name} style={errorStyle}>{error.message}</div>); // eslint-disable-line react/no-array-index-key
+          return (
+            <div key={index} className={errorClassName} data-name={error.name} style={errorStyle}>
+              {error.message}
+            </div>
+          ) // eslint-disable-line react/no-array-index-key
         })}
       </div>
-    );
+    )
   }
 }
 
-ErrorsBlock.propTypes = {
+;(ErrorsBlock as any).propTypes = {
   className: PropTypes.string,
   errorClassName: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   errors: customPropTypes.errors,
   errorStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   names: PropTypes.arrayOf(PropTypes.string), // eslint-disable-line react/no-unused-prop-types
-  style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-};
+  style: PropTypes.object // eslint-disable-line react/forbid-prop-types
+}
 
-ErrorsBlock.defaultProps = {
+;(ErrorsBlock as any).defaultProps = {
   className: undefined,
   errorClassName: undefined,
   errors: undefined,
   errorStyle: {},
   names: undefined,
-  style: {},
-};
+  style: {}
+}
 
-export default ErrorsBlock;
+export default ErrorsBlock

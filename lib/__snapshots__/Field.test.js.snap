@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders with label 1`] = `
 <div
   className=""
-  style={Object {}}
+  style={{}}
 >
   <label
-    style={Object {}}
+    style={{}}
   >
     Foo
   </label>
@@ -19,7 +19,7 @@ exports[`renders with label 1`] = `
     onChange={[Function]}
     onKeyPress={[Function]}
     readOnly={false}
-    style={Object {}}
+    style={{}}
     type="text"
     value=""
   />
@@ -32,7 +32,7 @@ exports[`renders with label 1`] = `
 exports[`renders with no label 1`] = `
 <div
   className=""
-  style={Object {}}
+  style={{}}
 >
   <p>
     Text above
@@ -43,7 +43,7 @@ exports[`renders with no label 1`] = `
     onChange={[Function]}
     onKeyPress={[Function]}
     readOnly={false}
-    style={Object {}}
+    style={{}}
     type="text"
     value=""
   />
@@ -57,7 +57,7 @@ exports[`renders with other props 1`] = `
 <div
   className="className"
   style={
-    Object {
+    {
       "color": "#fff",
     }
   }
@@ -66,7 +66,7 @@ exports[`renders with other props 1`] = `
     className="labelClassName"
     htmlFor="labelFor"
     style={
-      Object {
+      {
         "color": "#000",
       }
     }

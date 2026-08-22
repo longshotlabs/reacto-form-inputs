@@ -21,13 +21,13 @@ npm i --save reacto-form reacto-form-inputs
 Import CommonJS from `reacto-form-inputs/cjs/<ComponentName>`. Example, assuming you have Babel configured to convert all `import` to `require`:
 
 ```js
-import Field from 'reacto-form-inputs/cjs/Field';
+import Field from 'reacto-form-inputs/cjs/Field'
 ```
 
 Import ECMAScript module from `reacto-form-inputs/esm/<ComponentName>`. Example:
 
 ```js
-import Field from 'reacto-form-inputs/esm/Field';
+import Field from 'reacto-form-inputs/esm/Field'
 ```
 
 ### Alternative
@@ -35,24 +35,24 @@ import Field from 'reacto-form-inputs/esm/Field';
 You can also use named imports from the package entry point, but importing directly from the component path is recommended for minimizing bundle size.
 
 ```js
-import { Field, Input } from 'reacto-form-inputs';
+import { Field, Input } from 'reacto-form-inputs'
 ```
 
 ## Example
 
 ```js
-import React, { Component } from 'react';
-import { Form, FormList } from 'reacto-form';
-import BooleanCheckboxInput from 'reacto-form-inputs/cjs/BooleanCheckboxInput';
-import DateTimeInput from 'reacto-form-inputs/cjs/DateTimeInput';
-import ErrorsBlock from 'reacto-form-inputs/cjs/ErrorsBlock';
-import Field from 'reacto-form-inputs/cjs/Field';
-import Input from 'reacto-form-inputs/cjs/Input';
-import SelectCheckboxInput from 'reacto-form-inputs/cjs/SelectCheckboxInput';
-import moment from 'moment-timezone';
+import React, { Component } from 'react'
+import { Form, FormList } from 'reacto-form'
+import BooleanCheckboxInput from 'reacto-form-inputs/cjs/BooleanCheckboxInput'
+import DateTimeInput from 'reacto-form-inputs/cjs/DateTimeInput'
+import ErrorsBlock from 'reacto-form-inputs/cjs/ErrorsBlock'
+import Field from 'reacto-form-inputs/cjs/Field'
+import Input from 'reacto-form-inputs/cjs/Input'
+import SelectCheckboxInput from 'reacto-form-inputs/cjs/SelectCheckboxInput'
+import moment from 'moment-timezone'
 
-import createPlace from '../createPlace';
-import validatePlace from '../validatePlace';
+import createPlace from '../createPlace'
+import validatePlace from '../validatePlace'
 
 const dayOptions = [
   { label: 'Sunday', value: 0 },
@@ -61,53 +61,88 @@ const dayOptions = [
   { label: 'Wednesday', value: 3 },
   { label: 'Thursday', value: 4 },
   { label: 'Friday', value: 5 },
-  { label: 'Saturday', value: 6 },
-];
-const disableBasedOnAllDayValue = ({ openAllDay }) => !!openAllDay;
+  { label: 'Saturday', value: 6 }
+]
+const disableBasedOnAllDayValue = ({ openAllDay }) => !!openAllDay
 
 export default class PlacesCreateForm extends Component {
   render() {
-    const midnightThisMorning = moment().tz('America/Chicago').hour(0).minute(0).second(0).millisecond(0).toDate();
+    const midnightThisMorning = moment()
+      .tz('America/Chicago')
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0)
+      .toDate()
     return (
-      <Form ref={i => { this.form = i; }} onSubmit={createPlace} validator={validatePlace}>
-        <Field name="name" label="Name">
-          <Input name="name" type="text" />
+      <Form
+        ref={(i) => {
+          this.form = i
+        }}
+        onSubmit={createPlace}
+        validator={validatePlace}
+      >
+        <Field name='name' label='Name'>
+          <Input name='name' type='text' />
           <ErrorsBlock names={['name']} />
         </Field>
-        <Field name="website" label="Website">
-          <Input name="website" type="url" />
+        <Field name='website' label='Website'>
+          <Input name='website' type='url' />
           <ErrorsBlock names={['website']} />
         </Field>
         <h3>Hours</h3>
         <ErrorsBlock names={['hours']} />
-        <FormList name="hours">
+        <FormList name='hours'>
           <ErrorsBlock />
           <Form>
-            <Field name="startDate" label="Start date">
-              <DateTimeInput name="startDate" moment={moment} timezone="America/Chicago" value={midnightThisMorning} />
+            <Field name='startDate' label='Start date'>
+              <DateTimeInput
+                name='startDate'
+                moment={moment}
+                timezone='America/Chicago'
+                value={midnightThisMorning}
+              />
               <ErrorsBlock names={['startDate']} />
             </Field>
-            <Field name="days" label="Days">
-              <SelectCheckboxInput name="days" options={dayOptions} />
+            <Field name='days' label='Days'>
+              <SelectCheckboxInput name='days' options={dayOptions} />
               <ErrorsBlock names={['days']} />
             </Field>
-            <Field name="openAllDay">
-              <BooleanCheckboxInput name="openAllDay" label="Open all day" />
+            <Field name='openAllDay'>
+              <BooleanCheckboxInput name='openAllDay' label='Open all day' />
               <ErrorsBlock names={['openAllDay']} />
             </Field>
-            <Field name="openTime" label="Opens at">
-              <Input type="time" name="openTime" className="form-control" placeholder="HH:MM" isReadOnly={disableBasedOnAllDayValue} />
+            <Field name='openTime' label='Opens at'>
+              <Input
+                type='time'
+                name='openTime'
+                className='form-control'
+                placeholder='HH:MM'
+                isReadOnly={disableBasedOnAllDayValue}
+              />
               <ErrorsBlock names={['openTime']} />
             </Field>
-            <Field name="closeTime" label="Closes at">
-              <Input type="time" name="closeTime" placeholder="HH:MM" isReadOnly={disableBasedOnAllDayValue} />
+            <Field name='closeTime' label='Closes at'>
+              <Input
+                type='time'
+                name='closeTime'
+                placeholder='HH:MM'
+                isReadOnly={disableBasedOnAllDayValue}
+              />
               <ErrorsBlock names={['closeTime']} />
             </Field>
           </Form>
         </FormList>
-        <button type="button" onClick={() => { this.form.submit(); }}>Add</button>
+        <button
+          type='button'
+          onClick={() => {
+            this.form.submit()
+          }}
+        >
+          Add
+        </button>
       </Form>
-    );
+    )
   }
 }
 ```

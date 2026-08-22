@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "noImplicitAny": false,
+    "rewriteRelativeImportExtensions": true,
+    "skipLibCheck": true
+  },
+  "compileOnSave": false,
+  "exclude": ["node_modules", "cjs", "esm", "**/*.test.ts", "**/*.test.tsx"],
+  "include": ["lib"]
+}

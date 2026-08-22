@@ -12,14 +12,14 @@ export default function getDateTimeValuesFromDate(date, moment, timezone) {
       dayValue: '',
       monthValue: '',
       timeValue: '',
-      yearValue: '',
-    };
+      yearValue: ''
+    }
   }
-  const m = moment(date).tz(timezone);
+  const m = moment(date).tz(timezone)
   return {
     dayValue: m.format('DD'),
     monthValue: m.format('M'),
     timeValue: m.format('HH:mm'),
-    yearValue: m.format('YYYY'),
-  };
+    yearValue: m.format('YYYY')
+  }
 }

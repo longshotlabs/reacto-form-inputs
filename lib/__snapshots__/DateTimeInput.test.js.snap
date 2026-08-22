@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders 1`] = `
 <div
-  style={Object {}}
+  style={{}}
 >
   <select
     onChange={[Function]}
     readOnly={false}
     style={
-      Object {
+      {
         "display": "inline-block",
         "marginRight": 5,
-        "monthSelectStyle": Object {},
+        "monthSelectStyle": {},
         "verticalAlign": "middle",
         "width": "auto",
       }
@@ -90,7 +90,7 @@ exports[`renders 1`] = `
     placeholder="DD"
     readOnly={false}
     style={
-      Object {
+      {
         "display": "inline-block",
         "marginRight": 5,
         "verticalAlign": "middle",
@@ -106,7 +106,7 @@ exports[`renders 1`] = `
     placeholder="YYYY"
     readOnly={false}
     style={
-      Object {
+      {
         "display": "inline-block",
         "marginRight": 5,
         "verticalAlign": "middle",
@@ -122,7 +122,7 @@ exports[`renders 1`] = `
     placeholder="HH:MM"
     readOnly={false}
     style={
-      Object {
+      {
         "display": "inline-block",
         "marginRight": 5,
         "verticalAlign": "middle",

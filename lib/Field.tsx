@@ -1,0 +1,63 @@
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
+import customPropTypes from './shared/propTypes.js'
+import { isEmpty } from './shared/utils.js'
+
+class Field extends Component<any, any> {
+  [key: string]: any
+  static isFormField = true
+
+  getClassName() {
+    const { className, errors, isRequired } = this.props
+    const errorClass = Array.isArray(errors) && errors.length > 0 ? 'has-error' : ''
+    const requiredClass = isRequired ? 'required' : ''
+    return `${className || ''} ${errorClass} ${requiredClass}`.trim()
+  }
+
+  renderLabel() {
+    const { label, labelClassName, labelFor, labelStyle } = this.props
+
+    return (
+      <label className={labelClassName} htmlFor={labelFor} style={labelStyle}>
+        {label}
+      </label>
+    )
+  }
+
+  render() {
+    const { children, label, style } = this.props
+
+    return (
+      <div className={this.getClassName()} style={style}>
+        {!isEmpty(label) && this.renderLabel()}
+        {children}
+      </div>
+    )
+  }
+}
+
+;(Field as any).propTypes = {
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  errors: customPropTypes.errors,
+  label: PropTypes.node,
+  labelClassName: PropTypes.string,
+  labelFor: PropTypes.string,
+  labelStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  isRequired: PropTypes.bool,
+  style: PropTypes.object // eslint-disable-line react/forbid-prop-types
+}
+
+;(Field as any).defaultProps = {
+  className: undefined,
+  errors: undefined,
+  label: undefined,
+  labelClassName: undefined,
+  labelFor: undefined,
+  labelStyle: {},
+  isRequired: false,
+  style: {}
+}
+
+export default Field

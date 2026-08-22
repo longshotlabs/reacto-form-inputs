@@ -1,22 +1,22 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`renders 1`] = `
 <div
-  style={Object {}}
+  style={{}}
 >
   <div
-    style={Object {}}
+    style={{}}
   >
     <label
       htmlFor="SelectCheckboxInput_22"
-      style={Object {}}
+      style={{}}
     >
       <input
         checked={false}
         id="SelectCheckboxInput_22"
         onChange={[Function]}
         readOnly={false}
-        style={Object {}}
+        style={{}}
         type="checkbox"
         value="a"
       />
@@ -24,18 +24,18 @@ exports[`renders 1`] = `
     </label>
   </div>
   <div
-    style={Object {}}
+    style={{}}
   >
     <label
       htmlFor="SelectCheckboxInput_23"
-      style={Object {}}
+      style={{}}
     >
       <input
         checked={false}
         id="SelectCheckboxInput_23"
         onChange={[Function]}
         readOnly={false}
-        style={Object {}}
+        style={{}}
         type="checkbox"
         value="b"
       />
@@ -43,18 +43,18 @@ exports[`renders 1`] = `
     </label>
   </div>
   <div
-    style={Object {}}
+    style={{}}
   >
     <label
       htmlFor="SelectCheckboxInput_24"
-      style={Object {}}
+      style={{}}
     >
       <input
         checked={false}
         id="SelectCheckboxInput_24"
         onChange={[Function]}
         readOnly={false}
-        style={Object {}}
+        style={{}}
         type="checkbox"
         value="c"
       />

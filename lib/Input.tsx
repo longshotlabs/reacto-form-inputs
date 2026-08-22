@@ -1,46 +1,47 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-const stringDefaultEquals = (value1, value2) => ((value1 || '') === (value2 || ''));
+const stringDefaultEquals = (value1, value2) => (value1 || '') === (value2 || '')
 
-class Input extends Component {
-  static isFormInput = true;
+class Input extends Component<any, any> {
+  [key: string]: any
+  static isFormInput = true
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    const value = props.value || '';
+    const value = props.value || ''
 
     this.state = {
       initialValue: value,
-      value,
-    };
+      value
+    }
   }
 
-  componentWillMount() {
-    const { value } = this.state;
-    this.handleChanging(value);
-    this.handleChanged(value);
+  UNSAFE_componentWillMount() {
+    const { value } = this.state
+    this.handleChanging(value)
+    this.handleChanged(value)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { value } = this.props;
-    const { value: stateValue } = this.state;
-    const { value: nextValue } = nextProps;
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { value } = this.props
+    const { value: stateValue } = this.state
+    const { value: nextValue } = nextProps
 
     // Whenever a changed value prop comes in, and doesn't match our state,
     // and therefore was from outside this input, we reset state to that, thus becoming clean.
     if (!stringDefaultEquals(value, nextValue) && !stringDefaultEquals(stateValue, nextValue)) {
-      this.setValue(nextValue, true);
+      this.setValue(nextValue, true)
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { value } = this.state;
-    const { value: prevValue } = prevState;
+    const { value } = this.state
+    const { value: prevValue } = prevState
 
     if (!stringDefaultEquals(value, prevValue)) {
-      this.handleChanging(value);
+      this.handleChanging(value)
     }
 
     // We do not worry about whether value has changed when calling handleChanged
@@ -48,81 +49,82 @@ class Input extends Component {
     // value will not differ from prevValue here because `value` tracks "changing"
     // rather than "changed".
     if (this.shouldCallChanged) {
-      this.shouldCallChanged = false;
-      this.handleChanged(value);
+      this.shouldCallChanged = false
+      this.handleChanged(value)
     }
   }
 
   handleChanged(value) {
-    const { onChange } = this.props;
-    const outputValue = this.cleanValue(value);
+    const { onChange } = this.props
+    const outputValue = this.cleanValue(value)
     if (outputValue !== this.lastChangedValue) {
-      this.lastChangedValue = outputValue;
-      onChange(outputValue);
+      this.lastChangedValue = outputValue
+      onChange(outputValue)
     }
   }
 
   handleChanging(value) {
-    const { onChanging } = this.props;
-    const outputValue = this.cleanValue(value);
+    const { onChanging } = this.props
+    const outputValue = this.cleanValue(value)
     if (outputValue !== this.lastChangingValue) {
-      this.lastChangingValue = outputValue;
-      onChanging(outputValue);
+      this.lastChangingValue = outputValue
+      onChanging(outputValue)
     }
   }
 
   onKeyPress = (event) => {
-    const { onSubmit } = this.props;
-    if (event.which === 13) onSubmit();
-  };
+    const { onSubmit } = this.props
+    if (event.which === 13) onSubmit()
+  }
 
   onBlur = (event) => {
-    this.setValue(event.target.value, false);
-  };
+    this.setValue(event.target.value, false)
+  }
 
   onChange = (event) => {
-    let { value } = event.target;
-    value = value || '';
-    this.setState({ value });
-  };
+    let { value } = event.target
+    value = value || ''
+    this.setState({ value })
+  }
 
   getValue() {
-    return this.cleanValue(this.state.value);
+    return this.cleanValue(this.state.value)
   }
 
   setValue(value, shouldSetInitialValue) {
-    value = value || '';
+    value = value || ''
 
-    this.shouldCallChanged = true;
+    this.shouldCallChanged = true
 
-    this.setState({ value });
+    this.setState({ value })
 
     if (shouldSetInitialValue) {
-      this.setState({ initialValue: value });
+      this.setState({ initialValue: value })
     }
   }
 
   cleanValue(value) {
-    const { convertEmptyStringToNull, trimValue } = this.props;
-    let outputValue = trimValue ? value.trim() : value;
-    if (convertEmptyStringToNull && outputValue === '') outputValue = null;
-    return outputValue;
+    const { convertEmptyStringToNull, trimValue } = this.props
+    let outputValue = trimValue ? value.trim() : value
+    if (convertEmptyStringToNull && outputValue === '') outputValue = null
+    return outputValue
   }
 
   resetValue() {
-    this.setValue(this.props.value, true);
+    this.setValue(this.props.value, true)
   }
 
   // Input is dirty if value prop doesn't match value state. Whenever a changed
   // value prop comes in, we reset state to that, thus becoming clean.
   isDirty() {
-    const { initialValue, value } = this.state;
-    return !stringDefaultEquals(value, initialValue);
+    const { initialValue, value } = this.state
+    return !stringDefaultEquals(value, initialValue)
   }
 
   render() {
-    const { allowLineBreaks, className, isReadOnly, maxLength, name, placeholder, style, type } = this.props;
-    const { value } = this.state;
+    const { allowLineBreaks, className, isReadOnly, maxLength, name, placeholder, style, type } =
+      this.props
+    const { value } = this.state
 
     if (allowLineBreaks) {
       // Same as "input" but without `onKeyPress` and `type` props.
@@ -139,7 +141,7 @@ class Input extends Component {
           style={style}
           value={value}
         />
-      );
+      )
     }
 
     return (
@@ -156,11 +158,11 @@ class Input extends Component {
         type={type}
         value={value}
       />
-    );
+    )
   }
 }
 
-Input.propTypes = {
+;(Input as any).propTypes = {
   allowLineBreaks: PropTypes.bool,
   className: PropTypes.string,
   convertEmptyStringToNull: PropTypes.bool,
@@ -188,12 +190,12 @@ Input.propTypes = {
     'text',
     'time',
     'url',
-    'week',
+    'week'
   ]),
-  value: PropTypes.string,
-};
+  value: PropTypes.string
+}
 
-Input.defaultProps = {
+;(Input as any).defaultProps = {
   allowLineBreaks: false,
   className: undefined,
   convertEmptyStringToNull: true,
@@ -207,7 +209,7 @@ Input.defaultProps = {
   style: {},
   trimValue: true,
   type: 'text',
-  value: undefined,
-};
+  value: undefined
+}
 
-export default Input;
+export default Input
