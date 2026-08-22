@@ -57,13 +57,8 @@
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
-    "@babel/preset-react": "^7.29.7",
-    "@babel/preset-typescript": "^7.29.7",
     "@types/prop-types": "^15.7.15",
     "@types/react": "^16.14.70",
-    "babel-jest": "^30.4.1",
     "composable-form-tests": "^1.0.1",
     "core-js": "^3.45.1",
     "enzyme": "^3.11.0",
@@ -94,16 +89,7 @@
     ],
     "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.[tj]sx?$": [
-        "babel-jest",
-        {
-          "presets": [
-            "@babel/preset-env",
-            "@babel/preset-react",
-            "@babel/preset-typescript"
-          ]
-        }
-      ]
+      "^.+\\.[tj]sx?$": "<rootDir>/scripts/jest-transform.cjs"
     }
   },
   "engines": {
