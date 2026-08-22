@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "ignorePatterns": ["cjs/**/*", "esm/**/*", "node_modules/**/*", "lib/__snapshots__/**/*"],
+  "ignorePatterns": ["dist/**/*", "node_modules/**/*", "src/__snapshots__/**/*"],
   "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "node", "react"],
   "categories": {
     "correctness": "error",

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "esm",
-    "rootDir": "lib"
+    "outDir": "dist/esm",
+    "rootDir": "src"
   }
 }

@@ -2,4 +2,4 @@
 
 set -eu
 
-printf '{"type":"commonjs"}\n' > cjs/package.json
+printf '{"type":"commonjs"}\n' > dist/cjs/package.json

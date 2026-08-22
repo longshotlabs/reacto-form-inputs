@@ -14,38 +14,37 @@
   },
   "files": [
     "CHANGELOG.md",
-    "cjs",
-    "esm",
+    "dist",
     "LICENSE",
     "README.md"
   ],
   "type": "module",
   "sideEffects": false,
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
-  "types": "./esm/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./esm/index.d.ts",
-      "import": "./esm/index.js",
-      "require": "./cjs/index.js"
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
     },
     "./cjs/*": {
-      "types": "./esm/*.d.ts",
-      "default": "./cjs/*.js"
+      "types": "./dist/esm/*.d.ts",
+      "default": "./dist/cjs/*.js"
     },
     "./esm/*": {
-      "types": "./esm/*.d.ts",
-      "default": "./esm/*.js"
+      "types": "./dist/esm/*.d.ts",
+      "default": "./dist/esm/*.js"
     },
     "./*": {
-      "types": "./esm/*.d.ts",
-      "import": "./esm/*.js",
-      "require": "./cjs/*.js"
+      "types": "./dist/esm/*.d.ts",
+      "import": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js"
     }
   },
   "scripts": {
-    "build": "rm -fr cjs/* esm/* && tsc -p tsconfig-build.json && esbuild lib/*.ts lib/*.tsx lib/shared/*.ts --outbase=lib --outdir=esm --format=esm --platform=browser --target=es2022 && esbuild lib/*.ts lib/*.tsx lib/shared/*.ts --outbase=lib --outdir=cjs --format=cjs --platform=browser --target=es2015 && ./scripts/post-build.sh",
+    "build": "rm -fr dist/* && tsc -p tsconfig-build.json && esbuild src/*.ts src/*.tsx src/shared/*.ts --outbase=src --outdir=dist/esm --format=esm --platform=browser --target=es2022 && esbuild src/*.ts src/*.tsx src/shared/*.ts --outbase=src --outdir=dist/cjs --format=cjs --platform=browser --target=es2015 && ./scripts/post-build.sh",
     "check": "tsc --noEmit",
     "lint": "oxlint . && oxfmt --check .",
     "lint:fix": "oxlint --fix . && oxfmt --write .",
