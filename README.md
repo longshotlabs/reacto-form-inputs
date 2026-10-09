@@ -41,6 +41,7 @@ import { Field, Input } from 'reacto-form-inputs'
 ## Example
 
 ```js
+import moment from 'moment-timezone'
 import React, { Component } from 'react'
 import { Form, FormList } from 'reacto-form'
 import BooleanCheckboxInput from 'reacto-form-inputs/cjs/BooleanCheckboxInput'
@@ -49,7 +50,6 @@ import ErrorsBlock from 'reacto-form-inputs/cjs/ErrorsBlock'
 import Field from 'reacto-form-inputs/cjs/Field'
 import Input from 'reacto-form-inputs/cjs/Input'
 import SelectCheckboxInput from 'reacto-form-inputs/cjs/SelectCheckboxInput'
-import moment from 'moment-timezone'
 
 import createPlace from '../createPlace'
 import validatePlace from '../validatePlace'
@@ -183,8 +183,12 @@ Renders something like
 
 ```js
 <div>
-  <!-- One of the following divs for each error -->
-  <div data-name={error.name}>{error.message}</div>
+  <<!-- One of the following divs for each error -->
+  div
+    data-name={error.name}
+  >
+    {error.message}
+  </div>
 </div>
 ```
 
