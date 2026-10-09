@@ -1,16 +1,16 @@
 {
   "name": "reacto-form-inputs",
-  "version": "1.2.0",
+  "version": "0.0.0-development",
   "description": "Example React components that implement the Composable Form Specification for form inputs",
-  "homepage": "https://github.com/DairyStateDesigns/reacto-form-inputs",
+  "homepage": "https://github.com/longshotlabs/reacto-form-inputs",
   "bugs": {
-    "url": "https://github.com/DairyStateDesigns/reacto-form-inputs/issues"
+    "url": "https://github.com/longshotlabs/reacto-form-inputs/issues"
   },
   "license": "MIT",
   "author": "Dairy State Designs (http://dairystatedesigns.com/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DairyStateDesigns/reacto-form-inputs.git"
+    "url": "https://github.com/longshotlabs/reacto-form-inputs.git"
   },
   "files": [
     "CHANGELOG.md",
@@ -43,6 +43,9 @@
       "require": "./dist/cjs/*.js"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rm -fr dist/* && tsc -p tsconfig-build.json && esbuild src/*.ts src/*.tsx src/shared/*.ts --outbase=src --outdir=dist/esm --format=esm --platform=browser --target=es2022 && esbuild src/*.ts src/*.tsx src/shared/*.ts --outbase=src --outdir=dist/cjs --format=cjs --platform=browser --target=es2015 && ./scripts/post-build.sh",
     "check": "tsc --noEmit",
@@ -72,12 +75,30 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-test-renderer": "^16.14.0",
+    "semantic-release": "^25.0.9",
     "typescript": "^7.0.2"
   },
   "peerDependencies": {
     "react": ">=16"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/github",
+        {
+          "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on:\n- [npm package (@latest dist-tag)](https://www.npmjs.com/package/reacto-form-inputs/v/${nextRelease.version})\n- [GitHub release](https://github.com/longshotlabs/reacto-form-inputs/releases/tag/${nextRelease.version})\n\nIf this makes you happy, please consider [becoming a sponsor](https://github.com/sponsors/longshotlabs).\n\nYour **[semantic-release](https://github.com/semantic-release/semantic-release)** bot :package::rocket:"
+        }
+      ]
+    ],
+    "tagFormat": "${version}"
+  },
   "jest": {
     "moduleNameMapper": {
       "^(\\.{1,2}/.*)\\.js$": "$1"
@@ -92,7 +113,12 @@
     }
   },
   "engines": {
-    "node": ">=20.19",
-    "npm": ">=9"
+    "node": ">=20.19"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true,
+    "core-js@3.50.0": true,
+    "esbuild@0.28.2": true,
+    "unrs-resolver@1.12.2": true
   }
 }
